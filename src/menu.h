@@ -4,7 +4,7 @@ void menu() {
   scanf("%d", &c);
   if (c == 1) {
     system("cls");
-    set();
+    set_word();
     game(1);
     system("cls");
   }
@@ -17,5 +17,6 @@ void menu() {
   if (c == 3) {
     return;
   };
+   system("cls");
   menu();
 }

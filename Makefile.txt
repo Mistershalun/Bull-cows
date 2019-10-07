@@ -1,0 +1,2 @@
+all:
+	gcc -Wall -Werror -o Bull_and_cows main.c game.h menu.h 

@@ -5,9 +5,9 @@
 #include <stdbool.h>
 
 char word[4];
-char pl[4];
+char player_word[4];
 
-void set() {
+void set_word() {
   bool c = 1;
   int i, j;
   while (c) {
@@ -20,50 +20,50 @@ void set() {
   }
 }
 
-bool check() {
+bool input_check() {
   int i, j;
   for (i = 0; i < 4; i++)
-    if (pl[i] > 9) return 0;
+    if (player_word[i] > 9) return 0;
 
   for (i = 0; i < 4; i++)
     for (j = i + 1; j < 4; j++)
-      if (pl[i] == pl[j]) return 0;
+      if (player_word[i] == player_word[j]) return 0;
   return 1;
 }
 
-void BullCow() {
+void count_bullscows() {
   int b = 0, c = 0;
   int i, j;
   for (i = 0; i < 4; i++)
-    if (word[i] == pl[i]) b++;
+    if (word[i] == player_word[i]) b++;
 
   for (i = 0; i < 4; i++)
     for (j = 0; j < 4; j++)
-      if (word[i] == pl[j] && i != j) c++;
+      if (word[i] == player_word[j] && i != j) c++;
   printf("Bulls - %d\nCows-%d \n\n", b, c);
 }
 
 void input(int att) {
   printf("Guess the number!\nAttempt %d\nInput number - ", att);
-  scanf("%4s", pl);
+  scanf("%4s", player_word);
   int i;
-  for (i = 0; i < 4; i++) pl[i] = pl[i] - 48;
-  if (check()) {
-    BullCow();
+  for (i = 0; i < 4; i++) player_word[i] = player_word[i] - 48;
+  if (input_check()) {
+    count_bullscows();
   } else
     printf("\nInvalid input!\n");
 }
 
-bool res() {
+bool check_end() {
   int i;
   for (i = 0; i < 4; i++)
-    if (word[i] != pl[i]) return 0;
+    if (word[i] != player_word[i]) return 0;
   return 1;
 }
 
 void game(int att) {
   input(att);
-  if (!res())
+  if (!check_end())
     game(att + 1);
   else {
     printf("You win!!!");
